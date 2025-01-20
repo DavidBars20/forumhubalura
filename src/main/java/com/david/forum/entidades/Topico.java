@@ -1,5 +1,7 @@
 package com.david.forum.entidades;
 
+import com.david.forum.entidades.topico.AtualizarTopico;
+import com.david.forum.entidades.topico.CadastrarTopico;
 import com.david.forum.repositories.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
@@ -47,7 +49,7 @@ public class Topico {
         this.respostas = respostas;
     }
 
-    public Topico(CadastroTopico dados, UsuarioRepository usuarioRepository) {
+    public Topico(CadastrarTopico dados, UsuarioRepository usuarioRepository) {
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
         this.autor = usuarioRepository.findById(dados.autorId())

@@ -1,5 +1,6 @@
 package com.david.forum.entidades;
 
+import com.david.forum.repositories.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import java.time.LocalDateTime;
@@ -46,14 +47,14 @@ public class Topico {
         this.respostas = respostas;
     }
 
-    public Topico(CadastroTopicoDto dados, UsuarioRepository usuarioRepository) {
+    public Topico(CadastroTopico dados, UsuarioRepository usuarioRepository) {
         this.titulo = dados.titulo();
         this.mensagem = dados.mensagem();
         this.autor = usuarioRepository.findById(dados.autorId())
                 .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
         this.curso = dados.curso();
         this.dataCriacao = LocalDateTime.now();
-        this.status = Status.NAO_RESPONDIDO;
+        this.status = Status.SEM_RESPOSTA;
     }
 
     public Long getId() {
@@ -120,7 +121,7 @@ public class Topico {
         this.respostas = respostas;
     }
 
-    public void atualizarInfo(AtualizarTopicoDto dados) {
+    public void atualizarInfo(AtualizarTopico dados) {
         if (dados.titulo() != null) {
             this.titulo = dados.titulo();
         }
